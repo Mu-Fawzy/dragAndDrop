@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Box;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('backend.home');
+        $boxes = Box::whereHas('items')->with('items',function($q){
+            return $q->select('id','name','order','box_id');
+        })->get(['id','name','order']);
+
+        return view('backend.home', compact('boxes'));
     }
 }

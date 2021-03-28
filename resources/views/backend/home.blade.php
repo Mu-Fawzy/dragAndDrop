@@ -119,7 +119,19 @@
 
                 <div class="card-body">
                     
-                        
+                    {{--  {
+                        id: 1,
+                        name: "Id.",
+                        order: 19,
+                        items: [
+                        {
+                        id: 1,
+                        name: "Accusamus tempore aut nihil.",
+                        order: 15,
+                        box_id: 1
+                        },
+                    }      --}}
+                    
                     <div class="dropzone-teams card-body">
                         <div class="drag-team">
                             <!-- TEAM A -->
