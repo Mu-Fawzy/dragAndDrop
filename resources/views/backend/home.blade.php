@@ -120,96 +120,52 @@
                 <div class="card-body">
                     
                     {{--  {
-                        id: 1,
-                        name: "Id.",
-                        order: 19,
-                        items: [
-                        {
-                        id: 1,
-                        name: "Accusamus tempore aut nihil.",
-                        order: 15,
-                        box_id: 1
-                        },
-                    }      --}}
-                    
+                            id: 1,
+                            name: "Id.",
+                            order: 19,
+                            items: [
+                                {
+                                name: "Accusamus tempore aut nihil.",
+                                order: 15,
+                                box_id: 1
+                                },
+                            ]
+                        }      
+                    --}}
+
                     <div class="dropzone-teams card-body">
-                        <div class="drag-team">
-                            <!-- TEAM A -->
-                            <div class="row teamcard my-2 mx-2 pt-2 pb-1">
-                                <div class="col-md-4 my-auto text-center" style="font-weight: bold; font-size: 18px;">
-                                    <div class="row">
-                                        <div class="col-md-1"><i class="team-handle fas fa-ellipsis-v" style="cursor:ns-resize;"></i></div>
-                                        <div class="col-md-9">TEAM A</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-8 dropzone-users">
-                                    <!-- USER 1 -->
-                                    <div class="drag-user list list-row bg-white">
-                                        <div class="list-item border mb-1">
-                                            <div class="text-muted" style="cursor:ns-resize; padding-right: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
-                                            <div class="flex">
-                                                Linod Patrick
-                                                <div class="item-except text-muted text-sm userinfo">Has appointment at 15:00</div>
-                                            </div>
+                        @forelse ($boxes as $box)
+                            <div class="drag-team" box-id="{{ $box->id }}">
+                                <!-- {{ $box->name }} -->
+                                <div class="row teamcard my-2 mx-2 pt-2 pb-1">
+                                    <div class="col-md-4 my-auto text-center" style="font-weight: bold; font-size: 18px;">
+                                        <div class="row">
+                                            <div class="col-md-1"><i class="team-handle fas fa-ellipsis-v" style="cursor:ns-resize;"></i></div>
+                                            <div class="col-md-9">{{ $box->name }}</div>
                                         </div>
                                     </div>
+                                    <div class="col-md-8 dropzone-users">
+                                        @forelse ($box->items as $item)
+                                            <!-- {{ $item->name }} -->
+                                            <div class="drag-user list list-row bg-white" item-id="{{ $item->id }}">
+                                                <div class="list-item border mb-1">
+                                                    <div class="text-muted" style="cursor:ns-resize; padding-right: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
+                                                    <div class="flex">
+                                                        {{ $item->name }}
+                                                        <div class="item-except text-muted text-sm userinfo">{{ $item->info }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @empty
+                                            <div class="drag-user list list-row bg-white">No Item here</div>
+                                        @endforelse
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    
-                        <div class="drag-team">
-                            <!-- TEAM B -->
-                            <div class="row teamcard my-2 mx-2 pt-2 pb-1">
-                            <div class="col-md-4 my-auto text-center" style="font-weight: bold; font-size: 18px;">
-                                <div class="row">
-                                <div class="col-md-1"><i class="team-handle fas fa-ellipsis-v" style="cursor:ns-resize;"></i></div>
-                                <div class="col-md-9">TEAM B</div>
-                                </div>
-                            </div>
-                            <div class="col-md-8 dropzone-users">
-                                <!-- USER 3 -->
-                                <div class="drag-user list list-row bg-white">
-                                <div class="list-item border mb-1">
-                                    <div class="text-muted" style="cursor:ns-resize; padding-right: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
-                                    <div class="flex">Verwije Romme <div class="item-except text-muted text-sm userinfo"></div>
-                                    </div>
-                                    <div class="no-wrap">
-                                    <div class="dropdown">
-                                        <a class="text-muted" href="#" id="user3" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-cog"></i></a>
-                                        <ul class="dropdown-menu" aria-labelledby="user3">
-                                        <a class="dropdown-item" href="#" data-abc="true">See detail</a>
-                                        <a class="dropdown-item" data-abc="true">Download</a>
-                                        <a class="dropdown-item" data-abc="true">Edit</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" data-abc="true">Delete item</a>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <!-- USER 4 -->
-                                <div class="drag-user list list-row bg-white">
-                                <div class="list-item border mb-1">
-                                    <div class="text-muted" style="cursor:ns-resize; padding-right: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
-                                    <div class="flex">Mak Lokman<div class="item-except text-muted text-sm userinfo">shift starts at 11:00</div>
-                                    </div>
-                                    <div class="no-wrap">
-                                    <div class="dropdown">
-                                        <a class="text-muted" href="#" id="user4" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-cog"></i></a>
-                                        <ul class="dropdown-menu" aria-labelledby="user4">
-                                        <a class="dropdown-item" href="#" data-abc="true">See detail</a>
-                                        <a class="dropdown-item" data-abc="true">Download</a>
-                                        <a class="dropdown-item" data-abc="true">Edit</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" data-abc="true">Delete item</a>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
+                        @empty
+                            <div class="drag-team">No Box here</div>
+                        @endforelse
+                        
                     </div> <!-- DROPZONE END -->
                         
                     <div class="container">
@@ -234,20 +190,23 @@
     <script>
         // SORT TEAMS
         $(".dropzone-teams").sortable({
+            connectWith: ".dropzone-teams",
+            opacity: 0.5,
             placeholder: "drag-location",
             handle: ".team-handle",
             start: function (e, ui) {
-            ui.placeholder.height(ui.helper.outerHeight());
+                ui.placeholder.height(ui.helper.outerHeight());
             }
         });
         
         // SORT USERS
         $(".dropzone-users").sortable({
             connectWith: ".dropzone-users",
+            opacity: 0.5,
             handle: ".user-handle",
             placeholder: "drag-location",
             start: function (e, ui) {
-            ui.placeholder.height(ui.helper.outerHeight());
+                ui.placeholder.height(ui.helper.outerHeight());
             }
         });
         
@@ -258,6 +217,27 @@
             drop: function (event, ui) {
             ui.draggable.remove();
             }
+        });
+
+        $( ".dropzone-teams" ).on( "sortupdate", function( event, ui ) {
+            var teamArr = [];
+    
+            $(".dropzone-teams .drag-team").each(function( index ) {
+                teamArr[index] = $(this).attr('box-id');
+            });
+        
+            $.ajax({
+                url: "{{ route('admin.update.box') }}",
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {teamArr:teamArr},
+                success: function(data) {
+                    console.log('success');
+                }
+            });
+
         });
     </script>
 @endpush

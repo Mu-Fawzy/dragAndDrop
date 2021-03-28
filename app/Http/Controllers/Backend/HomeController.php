@@ -26,9 +26,20 @@ class HomeController extends Controller
     public function index()
     {
         $boxes = Box::whereHas('items')->with('items',function($q){
-            return $q->select('id','name','order','box_id');
-        })->get(['id','name','order']);
+            return $q->select('id','name','info','order','box_id')->orderBy('order','asc');
+        })->orderBy('order','asc')->get(['id','name','order']);
 
         return view('backend.home', compact('boxes'));
+    }
+
+    public function update(Request $request) {
+        $input = $request->all();
+
+        foreach ($input['teamArr'] as $key => $value) {
+            $key = $key+1;
+            Box::where('id',$value)->update(['order'=>$key]);
+        }
+
+        return response()->json(['status'=>'success']);
     }
 }

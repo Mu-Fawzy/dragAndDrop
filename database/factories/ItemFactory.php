@@ -24,7 +24,7 @@ class ItemFactory extends Factory
         return [
             'name'  => $this->faker->sentence(3),
             'info'  => $this->faker->sentence(5),
-            'order'  => $this->faker->unique()->numberBetween(1,15),
+            'order'  => $this->faker->unique()->numberBetween(1,25),
             'box_id'    => $this->faker->numberBetween(1,2)
         ];
     }
