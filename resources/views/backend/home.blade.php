@@ -221,11 +221,12 @@
 
         $( ".dropzone-teams" ).on( "sortupdate", function( event, ui ) {
             var teamArr = [];
-    
+
             $(".dropzone-teams .drag-team").each(function( index ) {
                 teamArr[index] = $(this).attr('box-id');
             });
-        
+
+
             $.ajax({
                 url: "{{ route('admin.update.box') }}",
                 method: 'POST',
@@ -233,6 +234,28 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {teamArr:teamArr},
+                success: function(data) {
+                    console.log('success');
+                }
+            });
+
+        });
+
+        $( ".dropzone-users" ).on( "sortupdate", function( event, ui ) {
+            var userArr = [];
+            var usersBox = $(this).closest('.drag-team').attr('box-id');
+            
+            $(this).find(".drag-user").each(function( index ) {
+                userArr[index] = $(this).attr('item-id');
+            });
+
+            $.ajax({
+                url: "{{ route('admin.update.box') }}",
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {userArr:userArr,usersBox:usersBox},
                 success: function(data) {
                     console.log('success');
                 }

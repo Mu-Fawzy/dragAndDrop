@@ -24,7 +24,7 @@ class AdminFactory extends Factory
     {
         return [
             'name' => 'mohamed fawzy',
-            'email' => 'mrrmohamedfawzy@gmai.com',
+            'email' => 'mrrmohamedfawzy@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('00000000'), // password
             'remember_token' => Str::random(10),
