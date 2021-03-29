@@ -16,25 +16,20 @@ class BoxController extends BackendController
     public function store(StoreRequest $request)
     {
         $pluralModelName = $this->getPluralName($this->model);
-        $ModelName = $this->getModelName($this->model);
         $input = $request->merge([
             'order' => ($this->model->max('order'))+1,
             'admin_id' => auth()->guard('admin')->id(),
         ]);
 
         $this->model->create($input->all());
-        alert()->success($ModelName.' Created Successful', $ModelName.' Created');
         return redirect()->route('admin.'.$pluralModelName.'.index');
     }
 
     public function update(StoreRequest $request, Box $box)
     {
         $pluralModelName = $this->getPluralName($this->model);
-        $ModelName = $this->getModelName($this->model);
         $input = $request->except('_token');
         $box->update($input);
-        
-        alert()->success($ModelName.' Updated Successful', $ModelName.' Updated');
         return redirect()->route('admin.'.$pluralModelName.'.edit',$box->id);
     }
 
