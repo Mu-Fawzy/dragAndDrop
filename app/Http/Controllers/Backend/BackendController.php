@@ -39,16 +39,25 @@ class BackendController extends Controller
 
     public function create()
     {
+        $lowerModelName = $this->getLowerNameModel($this->model);
         $pluralModelName = $this->getPluralName($this->model);
-        return view('backend.'.$pluralModelName.'.create');
+        $ucfirtsModelName = $this->getUCFirstName($this->model);
+        $title          = 'Create '.$ucfirtsModelName;
+        $slogan         = 'Here you can add '.$ucfirtsModelName;
+
+        return view('backend.'.$pluralModelName.'.create', compact('pluralModelName','title','slogan','lowerModelName'));
     }
 
     public function edit($id)
     {
+        $lowerModelName = $this->getLowerNameModel($this->model);
         $item = $this->model::findOrFail($id);
         $pluralModelName = $this->getPluralName($this->model);
+        $ucfirtsModelName = $this->getUCFirstName($this->model);
+        $title          = 'Edit - '.$item->name;
+        $slogan         = 'Here you can Edit '.$ucfirtsModelName;
 
-        return view('backend.'.$pluralModelName.'.edit', compact('item'));
+        return view('backend.'.$pluralModelName.'.edit', compact('item','pluralModelName','title','slogan','lowerModelName'));
     }
 
     public function destroy($id)

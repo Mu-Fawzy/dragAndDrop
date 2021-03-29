@@ -3,11 +3,7 @@
 @section('title', $title)
 
 @push('add_css')
-    <style>
-        .card-header:first-child {
-            display:flex;
-        }
-    </style>
+    
 @endpush
 
 @section('content')

@@ -15,7 +15,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @stack('add_css')
+    <style>
+        .card-header:first-child {
+            display:flex;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
