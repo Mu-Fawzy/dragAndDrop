@@ -1,0 +1,1 @@
+<a href="{{ route('admin.'.$pluralModelName.'.edit',$item->id) }}" class="btn btn-primary btn-sm">Edit</a>

@@ -26,9 +26,15 @@ class BackendController extends Controller
             $items = $items->paginate(15);
         }
 
+        $lowerModelName = $this->getLowerNameModel($this->model);
         $pluralModelName = $this->getPluralName($this->model);
+        $ucfirtsModelName = $this->getUCFirstName($this->model);
 
-        return view('backend.'.$pluralModelName.'.index',compact('items'));
+        $title          = $ucfirtsModelName.' List';
+        $slogan         = 'Here you can add, edit, delete '.$ucfirtsModelName;
+        $nothingHere    = 'No '.$ucfirtsModelName.' Yet ';
+
+        return view('backend.'.$pluralModelName.'.index',compact('items','lowerModelName','pluralModelName','title','slogan','nothingHere'));
     }
 
     public function create()
@@ -67,6 +73,11 @@ class BackendController extends Controller
     public function getPluralName($model)
     {
         return Str::plural($this->getLowerNameModel($model));
+    }
+
+    public function getUCFirstName($model)
+    {
+        return Str::ucfirst($this->getPluralName($model));
     }
 
     public function filter($items)
