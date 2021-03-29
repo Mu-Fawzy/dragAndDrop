@@ -34,6 +34,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::get('home', 'HomeController@index')->name('home');
         Route::post('box/update/', 'HomeController@update')->name('update.box');
         Route::post('box/delete/', 'HomeController@delete')->name('delete.box');
+
+        Route::resource('boxes', 'BoxController')->except('show');
     });
 
     Route::group(['namespace' => 'Backend\Auth'], function() {
@@ -52,4 +54,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
 
     });
+
+
 });

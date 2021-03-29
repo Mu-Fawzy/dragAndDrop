@@ -99,84 +99,45 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in as admin!') }}
-                </div>
-            </div>
+            @include('backend.inc.sidebar')
         </div>
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Drag & Drop') }}</div>
-
-                <div class="card-body">
-                    
-                    {{--  {
-                            id: 1,
-                            name: "Id.",
-                            order: 19,
-                            items: [
-                                {
-                                name: "Accusamus tempore aut nihil.",
-                                order: 15,
-                                box_id: 1
-                                },
-                            ]
-                        }      
-                    --}}
-
-                    <div class="dropzone-teams card-body">
-                        @forelse ($boxes as $box)
-                            <div class="drag-team" box-id="{{ $box->id }}">
-                                <!-- {{ $box->name }} -->
-                                <div class="row teamcard my-2 mx-2 pt-2 pb-1">
-                                    <div class="col-md-4 my-auto text-center" style="font-weight: bold; font-size: 18px;">
-                                        <div class="row">
-                                            <div class="col-md-1"><i class="team-handle fas fa-ellipsis-v" style="cursor:ns-resize;"></i></div>
-                                            <div class="col-md-9">{{ $box->name }}</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 dropzone-users">
-                                        @forelse ($box->items as $item)
-                                            <!-- {{ $item->name }} -->
-                                            <div class="drag-user list list-row bg-white" item-id="{{ $item->id }}">
-                                                <div class="list-item border mb-1">
-                                                    <div class="text-muted" style="cursor:ns-resize; padding-right: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
-                                                    <div class="flex">
-                                                        {{ $item->name }}
-                                                        <div class="item-except text-muted text-sm userinfo">{{ $item->info }}</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @empty
-                                            <div class="drag-user list list-row bg-white">No Item here</div>
-                                        @endforelse
+            <x-card-component>
+                <div class="dropzone-teams card-body">
+                    @forelse ($boxes as $box)
+                        <div class="drag-team" box-id="{{ $box->id }}">
+                            <!-- {{ $box->name }} -->
+                            <div class="row teamcard my-2 mx-2 pt-2 pb-1">
+                                <div class="col-md-4 my-auto text-center" style="font-weight: bold; font-size: 18px;">
+                                    <div class="row">
+                                        <div class="col-md-1"><i class="team-handle fas fa-ellipsis-v" style="cursor:ns-resize;"></i></div>
+                                        <div class="col-md-9">{{ $box->name }}</div>
                                     </div>
                                 </div>
-                            </div>
-                        @empty
-                            <div class="drag-team">No Box here</div>
-                        @endforelse
-                        
-                    </div> <!-- DROPZONE END -->
-                        
-                    <div class="container">
-                        <div class="row justify-content-center align-items-center">
-                            <div id="trash" class="grid-trash">
-                            Drag a <b>team</b> or <b>user</b> here to delete it
+                                <div class="col-md-8 dropzone-users">
+                                    @forelse ($box->items as $item)
+                                        <!-- {{ $item->name }} -->
+                                        <div class="drag-user list list-row bg-white" item-id="{{ $item->id }}">
+                                            <div class="list-item border mb-1">
+                                                <div class="text-muted" style="cursor:ns-resize; padding-right: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
+                                                <div class="flex">
+                                                    {{ $item->name }}
+                                                    <div class="item-except text-muted text-sm userinfo">{{ $item->info }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <div class="drag-user list list-row bg-white">No Item here</div>
+                                    @endforelse
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    @empty
+                        <div class="drag-team">No Box here</div>
+                    @endforelse
+                    
+                </div> <!-- DROPZONE END -->
+            </x-card-component>
         </div>
     </div>
 </div>
