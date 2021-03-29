@@ -63,9 +63,11 @@ class BackendController extends Controller
     public function destroy($id)
     {
         $item = $this->model::findOrFail($id);
+        $ModelName = $this->getModelName($this->model);
         $item->delete();
         $pluralModelName = $this->getPluralName($this->model);
 
+        alert()->error($ModelName.' Deleted Successful', $ModelName.' Deleted');
         return redirect()->route('admin.'.$pluralModelName.'.index');
     }
 
