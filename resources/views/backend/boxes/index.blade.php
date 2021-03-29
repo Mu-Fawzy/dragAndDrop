@@ -38,16 +38,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($boxes as $box)
+                            @forelse ($items as $item)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $box->name }}</td>
-                                    <td>{{ $box->created_at->format('d M,Y') }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->created_at->format('d M,Y') }}</td>
                                     <td>
-                                        <a href="{{ route('admin.boxes.edit',$box->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="{{ route('admin.boxes.destroy',$box->id) }}" class="btn btn-danger btn-sm" onclick="event.preventDefault(); document.getElementById('d-box-{{ $box->id }}').submit();">Delete</a>
+                                        <a href="{{ route('admin.boxes.edit',$item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="{{ route('admin.boxes.destroy',$item->id) }}" class="btn btn-danger btn-sm" onclick="event.preventDefault(); document.getElementById('d-box-{{ $item->id }}').submit();">Delete</a>
 
-                                        <form id="d-box-{{ $box->id }}" action="{{ route('admin.boxes.destroy',$box->id) }}" method="POST" class="d-none">
+                                        <form id="d-box-{{ $item->id }}" action="{{ route('admin.boxes.destroy',$item->id) }}" method="POST" class="d-none">
                                             @csrf
                                             @method('DELETE')
                                         </form>

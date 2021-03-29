@@ -15,26 +15,30 @@ class BoxController extends BackendController
 
     public function index()
     {
-        $boxes = $this->model::where('admin_id',auth()->guard('admin')->id())
-        ->paginate(2,['id','name','created_at']);
-        return view('backend.boxes.index',compact('boxes'));
+        $items = $this->model::where('admin_id',auth()->guard('admin')->id())->paginate(2,['id','name','created_at']);
+        $pluralModelName = $this->getPluralName($this->model);
+
+        return view('backend.'.$pluralModelName.'.index',compact('items'));
     }
 
     public function store(StoreRequest $request)
     {
+        $pluralModelName = $this->getPluralName($this->model);
         $input = $request->merge([
             'order' => ($this->model->max('order'))+1,
             'admin_id' => auth()->guard('admin')->id(),
         ]);
 
         $this->model->create($input->all());
-        return redirect()->route('admin.boxes.index');
+        return redirect()->route('admin.'.$pluralModelName.'.index');
     }
 
     public function update(StoreRequest $request, Box $box)
     {
+        $pluralModelName = $this->getPluralName($this->model);
         $input = $request->except('_token');
         $box->update($input);
-        return redirect()->route('admin.boxes.edit',$box->id);
+        return redirect()->route('admin.'.$pluralModelName.'.edit',$box->id);
     }
+
 }
