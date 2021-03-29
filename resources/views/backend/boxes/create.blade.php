@@ -1,4 +1,4 @@
-@extends('layouts.backend.app')
+@extends('layouts.backend.master')
 @push('add_css')
     <style>
         .card-header:first-child {
@@ -7,34 +7,27 @@
     </style>
 @endpush
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            @include('backend.inc.sidebar')
-        </div>
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header justify-content-between">
-                    <div class="my-auto">
-                        <div class="d-flex">
-                            <h4 class="content-title mb-0 my-auto">Boxes</h4>
-                            <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Create</span></div>
-                    </div>
-                    <div class="d-flex my-xl-auto left-content">
-                        Here you can add Box
-                    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header justify-content-between">
+                <div class="my-auto">
+                    <div class="d-flex">
+                        <h4 class="content-title mb-0 my-auto">Boxes</h4>
+                        <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Create</span></div>
                 </div>
-                <div class="card-body">
-                    <form action="{{ route('admin.boxes.store') }}" method="POST">
-                        @csrf
-                        @include('backend.boxes.form')
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </form>
+                <div class="d-flex my-xl-auto left-content">
+                    Here you can add Box
                 </div>
+            </div>
+            <div class="card-body">
+                <form action="{{ route('admin.boxes.store') }}" method="POST">
+                    @csrf
+                    @include('backend.boxes.form')
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('add_js')

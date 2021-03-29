@@ -15,6 +15,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('add_css')
 </head>
 <body>
     <div id="app">
@@ -73,10 +74,18 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        @include('backend.inc.sidebar')
+                    </div>
+                    @yield('content')
+                </div>
+            </div>
         </main>
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @stack('add_js')
 </body>
 </html>
