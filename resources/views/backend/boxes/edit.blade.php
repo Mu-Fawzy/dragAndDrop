@@ -21,11 +21,11 @@
                             <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Edit</span></div>
                     </div>
                     <div class="d-flex my-xl-auto left-content">
-                        Here you can Edit {{ $box->name }}
+                        Here you can Edit {{ $item->name }}
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.boxes.update', $box) }}" method="POST">
+                    <form action="{{ route('admin.boxes.update', $item) }}" method="POST">
                         @csrf
                         @method('PATCH')
                         @include('backend.boxes.form')
