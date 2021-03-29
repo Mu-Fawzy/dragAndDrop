@@ -13,7 +13,8 @@ class Item extends Model
         'name',
         'info',
         'order',
-        'box_id'
+        'box_id',
+        'admin_id'
     ];
 
     
@@ -22,4 +23,8 @@ class Item extends Model
         return $this->belongsTo(Box::class, 'box_id', 'id');
     }
     
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id', 'id');
+    }
 }

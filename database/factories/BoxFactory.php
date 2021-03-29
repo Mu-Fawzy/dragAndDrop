@@ -23,7 +23,8 @@ class BoxFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(1),
-            'order'  => $this->faker->unique()->numberBetween(1, 50)
+            'order'  => $this->faker->unique()->numberBetween(1, 50),
+            'admin_id'  => $this->faker->numberBetween(1, 2)
         ];
     }
 }

@@ -19,8 +19,10 @@ class CreateItemsTable extends Migration
             $table->string('info')->nullable();
             $table->integer('order');
             $table->unsignedBigInteger('box_id');
+            $table->unsignedBigInteger('admin_id');
             
             $table->foreign('box_id')->references('id')->on('boxes')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class AdminSeeder extends Seeder
 {
@@ -14,6 +15,13 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        Admin::factory(1)->create();
+        $admin = Admin::create([
+            'name' => 'mohamed fawzy',
+            'email' => 'mrrmohamedfawzy@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('00000000'), // password
+            'remember_token' => Str::random(10),
+        ]);
+        $admin->factory(1)->create();
     }
 }

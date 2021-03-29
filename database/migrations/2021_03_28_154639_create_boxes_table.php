@@ -17,6 +17,10 @@ class CreateBoxesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('order');
+            $table->unsignedBigInteger('admin_id');
+            
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

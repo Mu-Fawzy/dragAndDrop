@@ -47,4 +47,14 @@ class Admin extends Authenticatable
     {
         $this->notify(new AdminResetPasswordNotification($token));
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'admin_id', 'id');
+    }
+
+    public function boxes()
+    {
+        return $this->hasMany(Box::class, 'admin_id', 'id');
+    }
 }

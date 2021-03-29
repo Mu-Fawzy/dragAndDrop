@@ -12,6 +12,7 @@ class Box extends Model
     protected $fillable = [
         'name',
         'order',
+        'admin_id',
     ];
 
     
@@ -20,4 +21,9 @@ class Box extends Model
         return $this->hasMany(Item::class, 'box_id', 'id');
     }
     
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id', 'id');
+    }
+
 }

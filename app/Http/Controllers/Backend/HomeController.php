@@ -26,9 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $boxes = Box::whereHas('items')->with('items',function($q){
-            return $q->select('id','name','info','order','box_id')->orderBy('order','asc');
-        })->orderBy('order','asc')->get(['id','name','order']);
+        $admin = auth()->guard('admin')->id();
+        $boxes = Box::whereHas('items')->with(['admin','items'=>function($q) use($admin){
+            return $q->with('admin')->select('id','name','info','order','box_id','admin_id')->where('admin_id',$admin)->orderBy('order','asc');
+        }])->where('admin_id',$admin)->orderBy('order','asc')->get(['id','name','order']);
 
         return view('backend.home', compact('boxes'));
     }
