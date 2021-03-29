@@ -210,22 +210,12 @@
             }
         });
         
-        // TRASH TEAM AND/OR USER
-        $("#trash").droppable({
-            accept: ".drag-team, .drag-user",
-            hoverClass: "grid-trash-hover ",
-            drop: function (event, ui) {
-            ui.draggable.remove();
-            }
-        });
-
         $( ".dropzone-teams" ).on( "sortupdate", function( event, ui ) {
             var teamArr = [];
 
             $(".dropzone-teams .drag-team").each(function( index ) {
                 teamArr[index] = $(this).attr('box-id');
             });
-
 
             $.ajax({
                 url: "{{ route('admin.update.box') }}",
@@ -238,7 +228,7 @@
                     console.log('success');
                 }
             });
-
+            helper: 'clone'
         });
 
         $( ".dropzone-users" ).on( "sortupdate", function( event, ui ) {
@@ -260,7 +250,30 @@
                     console.log('success');
                 }
             });
-
+            helper: 'clone'
         });
+
+        // TRASH TEAM AND/OR USER
+        $("#trash").droppable({
+            accept: ".drag-team, .drag-user",
+            hoverClass: "grid-trash-hover ",
+            drop: function (event, ui) {
+                ui.draggable.remove();
+                var itemName = ui.helper[0].attributes[1].nodeName; // box-id - item-id
+                var itemId = ui.helper[0].attributes[1].textContent; // 4 - 5
+                $.ajax({
+                    url: "{{ route('admin.delete.box') }}",
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {itemName:itemName,itemId:itemId},
+                    success: function(data) {
+                        console.log('success');
+                    }
+                });
+            }
+        });
+
     </script>
 @endpush
