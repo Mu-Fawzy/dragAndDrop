@@ -13,14 +13,6 @@ class BoxController extends BackendController
         parent::__construct($model);
     }
 
-    public function index()
-    {
-        $items = $this->model::where('admin_id',auth()->guard('admin')->id())->paginate(2,['id','name','created_at']);
-        $pluralModelName = $this->getPluralName($this->model);
-
-        return view('backend.'.$pluralModelName.'.index',compact('items'));
-    }
-
     public function store(StoreRequest $request)
     {
         $pluralModelName = $this->getPluralName($this->model);
@@ -41,4 +33,13 @@ class BoxController extends BackendController
         return redirect()->route('admin.'.$pluralModelName.'.edit',$box->id);
     }
 
+    public function filter($items)
+    {
+        return $items->where('admin_id',auth()->guard('admin')->id());
+    }
+
+    public function selectToShow()
+    {
+        return ['id','name','created_at'];
+    }
 }

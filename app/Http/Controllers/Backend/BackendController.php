@@ -15,6 +15,22 @@ class BackendController extends Controller
         $this->middleware('auth:admin');
     }
 
+    public function index()
+    {
+        $items = $this->model;
+        $items = $this->filter($items);
+        $items = $items->orderBy('id','desc');
+        if ($this->selectToShow() != null) {
+            $items = $items->paginate(15,$this->selectToShow());
+        }else {
+            $items = $items->paginate(15);
+        }
+
+        $pluralModelName = $this->getPluralName($this->model);
+
+        return view('backend.'.$pluralModelName.'.index',compact('items'));
+    }
+
     public function create()
     {
         $pluralModelName = $this->getPluralName($this->model);
@@ -51,5 +67,15 @@ class BackendController extends Controller
     public function getPluralName($model)
     {
         return Str::plural($this->getLowerNameModel($model));
+    }
+
+    public function filter($items)
+    {
+        return $items;
+    }
+    
+    public function selectToShow()
+    {
+        return [];
     }
 }
