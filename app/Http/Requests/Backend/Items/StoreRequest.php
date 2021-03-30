@@ -23,8 +23,16 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        $roles = [
+            'name' => 'required|unique:items,name',
+            'info' => 'required',
+            'box_id' => 'required|max:1',
         ];
+
+        if ($this->item != null) {
+            $roles['name'] = 'required|unique:items,name,'.$this->item->id;
+        }
+
+        return $roles;
     }
 }

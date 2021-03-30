@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Box;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,9 @@ class BackendController extends Controller
     {
         $items = $this->model;
         $items = $this->filter($items);
+        if($this->with() != null){
+            $items = $items->with($this->with());
+        }
         $items = $items->orderBy('id','desc');
         if ($this->selectToShow() != null) {
             $items = $items->paginate(15,$this->selectToShow());
@@ -44,8 +48,9 @@ class BackendController extends Controller
         $ucfirtsModelName = $this->getUCFirstName($this->model);
         $title          = 'Create '.$ucfirtsModelName;
         $slogan         = 'Here you can add '.$ucfirtsModelName;
+        $passDateToView = $this->passDateToView();
 
-        return view('backend.'.$pluralModelName.'.create', compact('pluralModelName','title','slogan','lowerModelName'));
+        return view('backend.'.$pluralModelName.'.create', compact('pluralModelName','title','slogan','lowerModelName'))->with($passDateToView);
     }
 
     public function edit($id)
@@ -56,8 +61,9 @@ class BackendController extends Controller
         $ucfirtsModelName = $this->getUCFirstName($this->model);
         $title          = 'Edit - '.$item->name;
         $slogan         = 'Here you can Edit '.$ucfirtsModelName;
+        $passDateToView = $this->passDateToView();
 
-        return view('backend.'.$pluralModelName.'.edit', compact('item','pluralModelName','title','slogan','lowerModelName'));
+        return view('backend.'.$pluralModelName.'.edit', compact('item','pluralModelName','title','slogan','lowerModelName'))->with($passDateToView);
     }
 
     public function destroy($id)
@@ -95,7 +101,17 @@ class BackendController extends Controller
         return $items;
     }
     
+    public function with()
+    {
+        return [];
+    }
+
     public function selectToShow()
+    {
+        return [];
+    }
+
+    public function passDateToView()
     {
         return [];
     }

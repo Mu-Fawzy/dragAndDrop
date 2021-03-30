@@ -27,7 +27,7 @@
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->info }}</td>
-                            <td>{{ $item->box_id }}</td>
+                            <td>{{ $item->box->name }}</td>
                             <td>{{ $item->created_at->format('d M,Y') }}</td>
                             <td>
                                 @include('backend.inc.buttons.edit')
