@@ -58,10 +58,24 @@
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    document.getElementById(formId).submit()
-                    Swal.fire('تم الحذف بنجاح', '', 'success')
+                    document.getElementById(formId).submit();
+                    Swal.fire({
+                        title: 'تم الحذف بنجاح',
+                        icon: 'success',
+                        showDenyButton: false,
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: `نعم`,
+                    })
                 } else if (result.isDenied) {
-                    Swal.fire('تم الالغاء', '', 'info')
+                    Swal.fire({
+                        title: 'تم الالغاء',
+                        icon: 'info',
+                        showDenyButton: false,
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: `نعم`,
+                    })
                 }
             })
         }

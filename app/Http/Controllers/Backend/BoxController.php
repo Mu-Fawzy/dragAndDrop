@@ -23,7 +23,7 @@ class BoxController extends BackendController
 
         $this->model->create($input->all());
 
-        Alert::success('انشاء '.trans_choice('drag.'.$pluralModelName, 1), 'تم انشاء '.trans_choice('drag.'.$pluralModelName, 1).' ينجاح');
+        Alert::success('انشاء '.trans_choice('drag.'.$pluralModelName, 1), 'تم انشاء '.trans_choice('drag.'.$pluralModelName, 1).' ينجاح')->showConfirmButton('تم','#3085d6');;
         return redirect()->route('admin.'.lcfirst($pluralModelName).'.index');
     }
 
@@ -33,7 +33,7 @@ class BoxController extends BackendController
         $input = $request->except('_token');
         $box->update($input);
 
-        Alert::success('تحديث '.trans_choice('drag.'.$pluralModelName, 1), 'تم تحديث '.trans_choice('drag.'.$pluralModelName, 1).' ينجاح');
+        Alert::success('تحديث '.trans_choice('drag.'.$pluralModelName, 1), 'تم تحديث '.trans_choice('drag.'.$pluralModelName, 1).' ينجاح')->showConfirmButton('تم','#3085d6');
         return redirect()->route('admin.'.lcfirst($pluralModelName).'.edit',$box->id);
     }
 
