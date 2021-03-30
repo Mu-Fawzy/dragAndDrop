@@ -119,7 +119,7 @@
                                         <!-- {{ $item->name }} -->
                                         <div class="drag-user list list-row bg-white" item-id="{{ $item->id }}">
                                             <div class="list-item border mb-1">
-                                                <div class="text-muted" style="cursor:ns-resize; padding-right: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
+                                                <div class="text-muted" style="cursor:ns-resize; padding-left: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
                                                 <div class="flex">
                                                     {{ $item->name }}
                                                     <div class="item-except text-muted text-sm userinfo">{{ $item->info }}</div>

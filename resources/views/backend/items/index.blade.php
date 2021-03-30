@@ -30,7 +30,7 @@
                             <td>{{ $item->box->name }}</td>
                             <td>{{ $item->created_at->format('d M,Y') }}</td>
                             <td>
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-right">
                                     @include('backend.inc.buttons.edit')
                                     @include('backend.inc.buttons.delete')
                                 </div>
