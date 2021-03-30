@@ -26,7 +26,7 @@ class ItemController extends BackendController
         $this->model->create($input->all());
 
         Alert::success($ModelName.' Created', $ModelName.' Created Successfully');
-        return redirect()->route('admin.'.$pluralModelName.'.index');
+        return redirect()->route('admin.'.lcfirst($pluralModelName).'.index');
     }
 
     public function update(StoreRequest $request, Item $item)
@@ -37,7 +37,7 @@ class ItemController extends BackendController
         $item->update($input);
 
         Alert::success($ModelName.' Updated', $ModelName.' Updated Successfully');
-        return redirect()->route('admin.'.$pluralModelName.'.edit',$item->id);
+        return redirect()->route('admin.'.lcfirst($pluralModelName).'.edit',$item->id);
     }
 
     public function filter($items)

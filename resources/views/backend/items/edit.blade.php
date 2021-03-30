@@ -20,7 +20,7 @@
                 <form action="{{ route('admin.'.$pluralModelName.'.update', $item) }}" method="POST">
                     @csrf
                     @method('PATCH')
-                    @include('backend.'.$pluralModelName.'.form')
+                    @include('backend.'.lcfirst($pluralModelName).'.form')
                     <button type="submit" class="btn btn-primary">تعديل</button>
                 </form>
             </div>

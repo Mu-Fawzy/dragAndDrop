@@ -30,40 +30,34 @@ class BackendController extends Controller
             $items = $items->paginate(15);
         }
 
-        $lowerModelName = $this->getLowerNameModel($this->model);
         $pluralModelName = $this->getPluralName($this->model);
-        $ucfirtsModelName = $this->getUCFirstName($this->model);
 
-        $title          = $ucfirtsModelName.' قائمة';
-        $slogan         = 'هنا يمكنك اضافة, تعديل, حدف '.$ucfirtsModelName;
-        $nothingHere    = 'لايوجد '.$ucfirtsModelName.' بعد ';
+        $title          = 'قائمة '.trans_choice('drag.'.$pluralModelName, 2); 
+        $slogan         = 'هنا يمكنك اضافة, تعديل, حدف '.trans_choice('drag.'.$pluralModelName, 1);
+        $nothingHere    = 'لايوجد '.trans_choice('drag.'.$pluralModelName, 1).' بعد ';
 
-        return view('backend.'.$pluralModelName.'.index',compact('items','lowerModelName','pluralModelName','title','slogan','nothingHere'));
+        return view('backend.'.$pluralModelName.'.index',compact('items','pluralModelName','title','slogan','nothingHere'));
     }
 
     public function create()
     {
-        $lowerModelName = $this->getLowerNameModel($this->model);
         $pluralModelName = $this->getPluralName($this->model);
-        $ucfirtsModelName = $this->getUCFirstName($this->model);
-        $title          = 'انشاء '.$ucfirtsModelName;
-        $slogan         = 'هنا يمكنك اضافة '.$ucfirtsModelName;
+        $title          = 'انشاء - '.trans_choice('drag.'.$pluralModelName, 1); 
+        $slogan         = 'هنا يمكنك اضافة '.trans_choice('drag.'.$pluralModelName, 1);
         $passDateToView = $this->passDateToView();
 
-        return view('backend.'.$pluralModelName.'.create', compact('pluralModelName','title','slogan','lowerModelName'))->with($passDateToView);
+        return view('backend.'.$pluralModelName.'.create', compact('pluralModelName','title','slogan'))->with($passDateToView);
     }
 
     public function edit($id)
     {
-        $lowerModelName = $this->getLowerNameModel($this->model);
         $item = $this->model::findOrFail($id);
         $pluralModelName = $this->getPluralName($this->model);
-        $ucfirtsModelName = $this->getUCFirstName($this->model);
-        $title          = 'تعديل - '.$item->name;
-        $slogan         = 'هنا يمكنك تعديل '.$ucfirtsModelName;
+        $title          = 'تعديل - '.trans_choice('drag.'.$pluralModelName, 1); 
+        $slogan         = 'هنا يمكنك تعديل '.trans_choice('drag.'.$pluralModelName, 1); 
         $passDateToView = $this->passDateToView();
 
-        return view('backend.'.$pluralModelName.'.edit', compact('item','pluralModelName','title','slogan','lowerModelName'))->with($passDateToView);
+        return view('backend.'.$pluralModelName.'.edit', compact('item','pluralModelName','title','slogan'))->with($passDateToView);
     }
 
     public function destroy($id)
@@ -73,7 +67,7 @@ class BackendController extends Controller
         $item->delete();
         $pluralModelName = $this->getPluralName($this->model);
 
-        return redirect()->route('admin.'.$pluralModelName.'.index');
+        return redirect()->route('admin.'.lcfirst($pluralModelName).'.index');
     }
 
     public function getModelName($model)
@@ -81,19 +75,9 @@ class BackendController extends Controller
         return class_basename($model);
     }
 
-    public function getLowerNameModel($model)
-    {
-        return Str::lower($this->getModelName($model));
-    }
-
     public function getPluralName($model)
     {
-        return Str::plural($this->getLowerNameModel($model));
-    }
-
-    public function getUCFirstName($model)
-    {
-        return Str::ucfirst($this->getPluralName($model));
+        return Str::plural($this->getModelName($model));
     }
 
     public function filter($items)

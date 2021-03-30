@@ -24,8 +24,8 @@ class BoxController extends BackendController
 
         $this->model->create($input->all());
 
-        Alert::success($ModelName.' Created', $ModelName.' Created Successfully');
-        return redirect()->route('admin.'.$pluralModelName.'.index');
+        Alert::success('انشاء '.$ModelName, 'تم انشاء '.$ModelName.'  ينجاح');
+        return redirect()->route('admin.'.lcfirst($pluralModelName).'.index');
     }
 
     public function update(StoreRequest $request, Box $box)
@@ -36,7 +36,7 @@ class BoxController extends BackendController
         $box->update($input);
 
         Alert::success($ModelName.' Updated', $ModelName.' Updated Successfully');
-        return redirect()->route('admin.'.$pluralModelName.'.edit',$box->id);
+        return redirect()->route('admin.'.lcfirst($pluralModelName).'.edit',$box->id);
     }
 
     public function filter($items)

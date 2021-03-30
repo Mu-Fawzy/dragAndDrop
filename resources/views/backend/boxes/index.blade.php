@@ -8,8 +8,7 @@
 
 @section('content')
     <div class="col-md-9">
-        <x-table-card-components :title="$title" :slogan="$slogan" :pluralModelName="$pluralModelName" :lowerModelName="$lowerModelName">
-            
+        <x-table-card-components :title="$title" :slogan="$slogan" :pluralModelName="$pluralModelName">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -33,11 +32,12 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>{{ $nothingHere }}</tr>
+                        <tr>
+                            <td colspan="4" class="text-center">{{ $nothingHere }}</td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
-            
         </x-table-card-components>
     </div>
 @endsection

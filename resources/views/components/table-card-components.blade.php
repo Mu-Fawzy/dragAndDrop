@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
         <div class="btns mb-3">
-            <a href="{{ route('admin.'.$pluralModelName.'.create') }}" class="btn btn-primary btn-sm">اضف {{ $lowerModelName }}</a>
+            <a href="{{ route('admin.'.lcfirst($pluralModelName).'.create') }}" class="btn btn-primary btn-sm">اضف {{ trans_choice('drag.'.$pluralModelName, 1) }}</a>
         </div>
         {{ $slot }}
     </div>

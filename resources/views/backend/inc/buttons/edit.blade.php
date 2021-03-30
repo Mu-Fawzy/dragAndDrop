@@ -1,1 +1,1 @@
-<a href="{{ route('admin.'.$pluralModelName.'.edit',$item->id) }}" class="btn btn-primary btn-sm mr-2">تعديل</a>
+<a href="{{ route('admin.'.lcfirst($pluralModelName).'.edit',$item->id) }}" class="btn btn-primary btn-sm mr-2">تعديل</a>

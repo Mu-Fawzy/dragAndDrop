@@ -17,9 +17,9 @@
                 <div class="d-flex my-xl-auto left-content">{{ $slogan }}</div>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.'.$pluralModelName.'.store') }}" method="POST">
+                <form action="{{ route('admin.'.lcfirst($pluralModelName).'.store') }}" method="POST">
                     @csrf
-                    @include('backend.'.$pluralModelName.'.form')
+                    @include('backend.'.lcfirst($pluralModelName).'.form')
                     <button type="submit" class="btn btn-primary">انشاء</button>
                 </form>
             </div>

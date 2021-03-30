@@ -9,19 +9,17 @@ class TableCardComponents extends Component
     public $title;
     public $slogan;
     public $pluralModelName;
-    public $lowerModelName;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title, $slogan, $pluralModelName, $lowerModelName)
+    public function __construct($title, $slogan, $pluralModelName)
     {
         $this->title = $title;
         $this->slogan = $slogan;
         $this->pluralModelName = $pluralModelName;
-        $this->lowerModelName = $lowerModelName;
     }
 
     /**
