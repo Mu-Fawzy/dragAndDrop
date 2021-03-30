@@ -41,5 +41,27 @@
 @endsection
 
 @push('add_js')
-    
+    <script>
+        function deleteConfirm(formId){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to remove this Box?!",
+                icon: 'warning',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: `Yes`,
+                denyButtonText: `No`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    document.getElementById(formId).submit()
+                    Swal.fire('Deleted sucessfuly', '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire('Canceld', '', 'info')
+                }
+            })
+        }
+    </script>
 @endpush

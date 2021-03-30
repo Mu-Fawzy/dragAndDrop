@@ -62,6 +62,7 @@ class BackendController extends Controller
 
     public function destroy($id)
     {
+        $ModelName = $this->getModelName($this->model);
         $item = $this->model::findOrFail($id);
         $item->delete();
         $pluralModelName = $this->getPluralName($this->model);
