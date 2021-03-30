@@ -58,7 +58,7 @@ class ItemController extends BackendController
     public function passDateToView()
     {
         return [
-            'boxes' => Box::get()
+            'boxes' => Box::where('admin_id',auth()->guard('admin')->id())->get()
         ];
     }
 }
