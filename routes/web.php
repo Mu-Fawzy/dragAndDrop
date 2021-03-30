@@ -23,11 +23,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
-// GET|HEAD  |  password/confirm  |  password.confirm  |  Controllers\Auth\ConfirmPasswordController@showConfirmForm
-// POST      |  password/confirm  |                    |  Controllers\Auth\ConfirmPasswordController@confirm
-
-
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     
     Route::group(['namespace' => 'Backend'], function() {
@@ -36,6 +31,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::post('box/delete/', 'HomeController@delete')->name('delete.box');
 
         Route::resource('boxes', 'BoxController')->except('show');
+        Route::resource('items', 'ItemController')->except('show');
     });
 
     Route::group(['namespace' => 'Backend\Auth'], function() {

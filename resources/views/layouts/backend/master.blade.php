@@ -80,7 +80,7 @@
         <main class="py-4">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         @include('backend.inc.sidebar')
                     </div>
                     @yield('content')

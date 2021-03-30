@@ -98,10 +98,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             @include('backend.inc.sidebar')
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             <x-card-component>
                 <div class="dropzone-teams card-body">
                     @forelse ($boxes as $box)
