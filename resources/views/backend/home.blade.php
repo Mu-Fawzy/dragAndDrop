@@ -127,13 +127,13 @@
                                             </div>
                                         </div>
                                     @empty
-                                        <div class="drag-user list list-row bg-white">No Item here</div>
+                                        <div class="drag-user list list-row bg-white">لايوجد مهام حتى الان</div>
                                     @endforelse
                                 </div>
                             </div>
                         </div>
                     @empty
-                        <div class="drag-team">No Box here</div>
+                        <div class="drag-team">لايوجد صناديق حتى الان</div>
                     @endforelse
                     
                 </div> <!-- DROPZONE END -->

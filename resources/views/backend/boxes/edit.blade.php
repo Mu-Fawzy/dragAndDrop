@@ -21,7 +21,7 @@
                     @csrf
                     @method('PATCH')
                     @include('backend.'.$pluralModelName.'.form')
-                    <button type="submit" class="btn btn-primary">Edit</button>
+                    <button type="submit" class="btn btn-primary">تعديل</button>
                 </form>
             </div>
         </div>

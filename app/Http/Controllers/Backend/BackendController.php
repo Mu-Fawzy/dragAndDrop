@@ -34,9 +34,9 @@ class BackendController extends Controller
         $pluralModelName = $this->getPluralName($this->model);
         $ucfirtsModelName = $this->getUCFirstName($this->model);
 
-        $title          = $ucfirtsModelName.' List';
-        $slogan         = 'Here you can add, edit, delete '.$ucfirtsModelName;
-        $nothingHere    = 'No '.$ucfirtsModelName.' Yet ';
+        $title          = $ucfirtsModelName.' قائمة';
+        $slogan         = 'هنا يمكنك اضافة, تعديل, حدف '.$ucfirtsModelName;
+        $nothingHere    = 'لايوجد '.$ucfirtsModelName.' بعد ';
 
         return view('backend.'.$pluralModelName.'.index',compact('items','lowerModelName','pluralModelName','title','slogan','nothingHere'));
     }
@@ -46,8 +46,8 @@ class BackendController extends Controller
         $lowerModelName = $this->getLowerNameModel($this->model);
         $pluralModelName = $this->getPluralName($this->model);
         $ucfirtsModelName = $this->getUCFirstName($this->model);
-        $title          = 'Create '.$ucfirtsModelName;
-        $slogan         = 'Here you can add '.$ucfirtsModelName;
+        $title          = 'انشاء '.$ucfirtsModelName;
+        $slogan         = 'هنا يمكنك اضافة '.$ucfirtsModelName;
         $passDateToView = $this->passDateToView();
 
         return view('backend.'.$pluralModelName.'.create', compact('pluralModelName','title','slogan','lowerModelName'))->with($passDateToView);
@@ -59,8 +59,8 @@ class BackendController extends Controller
         $item = $this->model::findOrFail($id);
         $pluralModelName = $this->getPluralName($this->model);
         $ucfirtsModelName = $this->getUCFirstName($this->model);
-        $title          = 'Edit - '.$item->name;
-        $slogan         = 'Here you can Edit '.$ucfirtsModelName;
+        $title          = 'تعديل - '.$item->name;
+        $slogan         = 'هنا يمكنك تعديل '.$ucfirtsModelName;
         $passDateToView = $this->passDateToView();
 
         return view('backend.'.$pluralModelName.'.edit', compact('item','pluralModelName','title','slogan','lowerModelName'))->with($passDateToView);

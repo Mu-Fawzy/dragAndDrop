@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title','DashBoard')</title>
+    <title>@yield('title','لوحة التحكم')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -44,13 +44,13 @@
                         @guest('admin')
                             @if (Route::has('admin.login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('admin.login') }}">{{ __('تسجيل الدخول') }}</a>
                                 </li>
                             @endif
                             
                             @if (Route::has('admin.register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('admin.register') }}">{{ __('تسجيل جديد') }}</a>
                                 </li>
                             @endif
                         @else
@@ -63,7 +63,7 @@
                                     <a class="dropdown-item" href="{{ route('admin.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('الخروج') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">

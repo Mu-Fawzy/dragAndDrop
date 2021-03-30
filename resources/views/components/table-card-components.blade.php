@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
         <div class="btns mb-3">
-            <a href="{{ route('admin.'.$pluralModelName.'.create') }}" class="btn btn-primary btn-sm">Add {{ $lowerModelName }}</a>
+            <a href="{{ route('admin.'.$pluralModelName.'.create') }}" class="btn btn-primary btn-sm">اضف {{ $lowerModelName }}</a>
         </div>
         {{ $slot }}
     </div>

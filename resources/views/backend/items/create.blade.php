@@ -20,7 +20,7 @@
                 <form action="{{ route('admin.'.$pluralModelName.'.store') }}" method="POST">
                     @csrf
                     @include('backend.'.$pluralModelName.'.form')
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">انشاء</button>
                 </form>
             </div>
         </div>

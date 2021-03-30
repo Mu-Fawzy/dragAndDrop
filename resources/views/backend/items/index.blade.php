@@ -14,11 +14,11 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Info</th>
-                        <th scope="col">Box-id</th>
-                        <th scope="col">Created At</th>
-                        <th scope="col">Options</th>
+                        <th scope="col">اسم المهمة</th>
+                        <th scope="col">المعلومات</th>
+                        <th scope="col">اسم صندوق المهام</th>
+                        <th scope="col">تاريخ الانشاء</th>
+                        <th scope="col">العمليات</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,22 +50,22 @@
     <script>
         function deleteConfirm(formId){
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You want to remove this Box?!",
+                title: 'هل انت متأكد ؟',
+                text: "تريد إزالة هذه المهمة!",
                 icon: 'warning',
                 showDenyButton: true,
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: `Yes`,
-                denyButtonText: `No`,
+                confirmButtonText: `نعم`,
+                denyButtonText: `لا`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     document.getElementById(formId).submit()
-                    Swal.fire('Deleted sucessfuly', '', 'success')
+                    Swal.fire('تم الحذف بنجاح', '', 'success')
                 } else if (result.isDenied) {
-                    Swal.fire('Canceld', '', 'info')
+                    Swal.fire('تم الالغاء', '', 'info')
                 }
             })
         }
