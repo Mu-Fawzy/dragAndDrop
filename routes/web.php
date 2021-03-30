@@ -26,6 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     
     Route::group(['namespace' => 'Backend'], function() {
+        Route::get('/', 'HomeController@index');
         Route::get('home', 'HomeController@index')->name('home');
         Route::post('box/update/', 'HomeController@update')->name('update.box');
         Route::post('box/delete/', 'HomeController@delete')->name('delete.box');
