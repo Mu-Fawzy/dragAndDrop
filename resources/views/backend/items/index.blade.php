@@ -28,7 +28,7 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->info }}</td>
                             <td>{{ $item->box->name }}</td>
-                            <td>{{ $item->created_at->format('d M,Y') }}</td>
+                            <td>{{ $item->created_at }}</td>
                             <td>
                                 <div class="d-flex justify-content-right">
                                     @include('backend.inc.buttons.edit')

@@ -23,7 +23,7 @@
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->created_at->format('d M,Y') }}</td>
+                            <td>{{ $item->created_at }}</td>
                             <td>
                                 <div class="d-flex justify-content-right">
                                     @include('backend.inc.buttons.edit')

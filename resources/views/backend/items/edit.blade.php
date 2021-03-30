@@ -17,7 +17,7 @@
                 <div class="d-flex my-xl-auto left-content">{{ $slogan }}</div>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.'.$pluralModelName.'.update', $item) }}" method="POST">
+                <form action="{{ route('admin.'.lcfirst($pluralModelName).'.update', $item) }}" method="POST">
                     @csrf
                     @method('PATCH')
                     @include('backend.'.lcfirst($pluralModelName).'.form')

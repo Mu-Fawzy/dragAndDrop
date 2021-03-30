@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,4 +27,8 @@ class Box extends Model
         return $this->belongsTo(Admin::class, 'admin_id', 'id');
     }
 
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->translatedFormat('d M,Y');
+    }
 }

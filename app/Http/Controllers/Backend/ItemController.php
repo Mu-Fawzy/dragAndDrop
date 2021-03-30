@@ -16,7 +16,6 @@ class ItemController extends BackendController
 
     public function store(StoreRequest $request)
     {
-        $ModelName = $this->getModelName($this->model);
         $pluralModelName = $this->getPluralName($this->model);
         $input = $request->merge([
             'order' => ($this->model->max('order'))+1,
@@ -25,18 +24,17 @@ class ItemController extends BackendController
 
         $this->model->create($input->all());
 
-        Alert::success($ModelName.' Created', $ModelName.' Created Successfully');
+        Alert::success('انشاء '.trans_choice('drag.'.$pluralModelName, 1), 'تم انشاء '.trans_choice('drag.'.$pluralModelName, 1).' ينجاح');
         return redirect()->route('admin.'.lcfirst($pluralModelName).'.index');
     }
 
     public function update(StoreRequest $request, Item $item)
     {
-        $ModelName = $this->getModelName($this->model);
         $pluralModelName = $this->getPluralName($this->model);
         $input = $request->except('_token');
         $item->update($input);
 
-        Alert::success($ModelName.' Updated', $ModelName.' Updated Successfully');
+        Alert::success('تحديث '.trans_choice('drag.'.$pluralModelName, 1), 'تم تحديث '.trans_choice('drag.'.$pluralModelName, 1).' ينجاح');
         return redirect()->route('admin.'.lcfirst($pluralModelName).'.edit',$item->id);
     }
 

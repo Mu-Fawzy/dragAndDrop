@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,10 @@ class Item extends Model
     public function admin()
     {
         return $this->belongsTo(Admin::class, 'admin_id', 'id');
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->translatedFormat('d M,Y');
     }
 }
