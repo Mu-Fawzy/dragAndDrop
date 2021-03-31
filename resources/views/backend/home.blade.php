@@ -149,7 +149,7 @@
                                             </div>
                                         </div>
                                     @empty
-                                        <div class="drag-user list list-row bg-white">لايوجد مهام حتى الان</div>
+                                        <div class="drag-user list list-row bg-white">لايوجد عناصر حتى الان - <a href="{{ route('admin.items.create') }}">اضف عنصر الان</a></div>
                                     @endforelse
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                     @empty
-                        <div class="drag-team">لايوجد صناديق حتى الان</div>
+                        <div class="drag-team">لايوجد اقسام حتى الان - <a href="{{ route('admin.boxes.create') }}">اضف قسم الان</a></div>
                     @endforelse
                     
                 </div> <!-- DROPZONE END -->

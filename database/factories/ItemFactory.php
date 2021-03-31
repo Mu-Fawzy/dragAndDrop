@@ -22,9 +22,9 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'name'  => $this->faker->sentence(3),
-            'info'  => $this->faker->sentence(5),
-            'order'  => $this->faker->unique()->numberBetween(1,25),
+            'name'  => 'العنصر '.$this->faker->unique()->numberBetween(1, 100),
+            'info'  => 'معلومات العنصر',
+            'order'  => $this->faker->unique()->numberBetween(1,100),
             'box_id'    => $this->faker->numberBetween(1,2),
             'admin_id'  => $this->faker->numberBetween(1, 2)
         ];

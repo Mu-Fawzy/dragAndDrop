@@ -7,11 +7,13 @@
                 <a href="{{ route('admin.home') }}">الرئيسية</a>
             </li>
             <li class="list-group-item">
-                <a href="{{ route('admin.boxes.index') }}">صناديق المهام</a>
+                <a href="{{ route('admin.boxes.index') }}">الاقسام</a>
             </li>
-            <li class="list-group-item">
-                <a href="{{ route('admin.items.index') }}">المهام</a>
-            </li>
+            @if ($boxes->count() > 0)
+                <li class="list-group-item">
+                    <a href="{{ route('admin.items.index') }}">العناصر</a>
+                </li>
+            @endif
         </ul>
     </div>
 </div>

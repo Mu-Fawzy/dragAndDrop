@@ -22,8 +22,8 @@ class BoxFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence(1),
-            'order'  => $this->faker->unique()->numberBetween(1, 50),
+            'name' => 'القسم '.$this->faker->unique()->numberBetween(1, 100),
+            'order'  => $this->faker->unique()->numberBetween(1, 100),
             'admin_id'  => $this->faker->numberBetween(1, 2)
         ];
     }

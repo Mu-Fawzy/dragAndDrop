@@ -19,9 +19,9 @@
 </div>
 
 <div class="form-group">
-    <label for="exampleFormControlInput1">اختر صندوق المهام</label>
+    <label for="exampleFormControlInput1">اختر القسم</label>
     <select class="form-control @error('box_id') is-invalid @enderror" name="box_id">
-        <option value="">اختر صندوق المهام</option>
+        <option value="">اختر القسم</option>
         @foreach ($boxes as $box)
             <option value="{{ $box->id }}" {{ ($item->box_id ?? old('box_id')) == $box->id ? 'selected' : ''  }}>{{ $box->name }}</option>
         @endforeach

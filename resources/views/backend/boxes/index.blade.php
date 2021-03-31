@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">اسم صندوق المهام</th>
+                        <th scope="col">اسم القسم</th>
                         <th scope="col">تاريخ الانشاء</th>
                         <th scope="col">العمليات</th>
                     </tr>
