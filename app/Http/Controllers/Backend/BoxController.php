@@ -46,21 +46,22 @@ class BoxController extends BackendController
         $itemCompletedId = $input['itemCompletedId'];
         $itemCompletedValue = $input['itemCompletedValue'];
         
-        $boxes = Box::where('id',$itemCompletedId)->update(['completed'=>$itemCompletedValue]);
-        $items = Item::where('box_id', $itemCompletedId)->get();
-        
-        foreach ($items as $item) {
+        $box = Box::findOrFail($itemCompletedId);
+        $updatebox = $box->update(['completed'=>$itemCompletedValue]);
+
+        $items = $box->find($itemCompletedId)->items->each(function($item) use($itemCompletedValue){
             if($itemCompletedValue == 1){
                 $item->update(['completed'=> 1]);
             }else{
                 $item->update(['completed'=> 0]);
             }
-        }
+        });
         
         return response()->json([
             'status'=>'success',
             'itemCompletedValue'=> $itemCompletedValue,
             'itemCompletedId'=> $itemCompletedId,
+            'boxes'=> $updatebox,
             'items'=> $items,
         ]);
     }

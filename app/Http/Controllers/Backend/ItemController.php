@@ -46,12 +46,27 @@ class ItemController extends BackendController
         $itemCompletedId = $input['itemCompletedId'];
         $itemCompletedValue = $input['itemCompletedValue'];
         
-        Item::where('id',$itemCompletedId)->update(['completed'=>$itemCompletedValue]);
+        $item = Item::findOrFail($itemCompletedId);
+        $updateitem = $item->update(['completed'=>$itemCompletedValue]);
+
+        $box = Box::findOrFail($item->box_id);
+        $boxcheck = $box->items->every(function ($value, $key) {
+            return $value->completed == 1;
+        });
+        if($boxcheck == true) {
+            $box->update(['completed'=>1]);
+        }else{
+            $box->update(['completed'=>0]);
+        }
+
         return response()->json([
             'status'=>'success',
             'itemCompletedValue'=> $itemCompletedValue,
             'itemCompletedId'=> $itemCompletedId,
+            'box'=> $box,
+            'boxcheck'=> $boxcheck,
         ]);
+
     }
 
     public function filter($items)

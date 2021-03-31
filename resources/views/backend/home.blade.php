@@ -279,13 +279,22 @@
                 },
                 data: {itemCompletedId:itemCompletedId,itemCompletedValue:itemCompletedValue},
                 success: function(data) {
-                    console.log(data.status);
+                    console.log(data.box.id);
                     if (data.itemCompletedValue == 1){
                         $("#completed-"+itemCompletedId).find('.flex').addClass('line-through');
                     }else{
                         $("#completed-"+itemCompletedId).find('.flex').removeClass('line-through');
                     }
                     
+                    if(data.boxcheck == true) {
+                        $("#completedbox-"+data.box.id).find('.col-md-9').addClass('line-through');
+                        $('input[data-id="'+data.box.id+'"].completedbox').prop('checked', true);
+                    }else {
+                        $.each(data.box, function(i, box) {
+                            $("#completedbox-"+data.box.id).find('.col-md-9').removeClass('line-through');
+                            $('input[data-id="'+data.box.id+'"].completedbox').prop('checked', false);
+                        });
+                    }
                 }
             });
         });
