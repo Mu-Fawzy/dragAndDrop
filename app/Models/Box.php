@@ -13,6 +13,7 @@ class Box extends Model
     protected $fillable = [
         'name',
         'order',
+        'completed',
         'admin_id',
     ];
 

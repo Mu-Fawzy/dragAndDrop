@@ -14,6 +14,7 @@ class Item extends Model
         'name',
         'info',
         'order',
+        'completed',
         'box_id',
         'admin_id'
     ];

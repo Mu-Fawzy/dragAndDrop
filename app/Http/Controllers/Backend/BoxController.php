@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\Backend\Boxes\StoreRequest;
 use App\Models\Box;
+use App\Models\Item;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BoxController extends BackendController
@@ -19,6 +21,7 @@ class BoxController extends BackendController
         $input = $request->merge([
             'order' => ($this->model->max('order'))+1,
             'admin_id' => auth()->guard('admin')->id(),
+            'completed' => false,
         ]);
 
         $this->model->create($input->all());
@@ -35,6 +38,31 @@ class BoxController extends BackendController
 
         Alert::success('تحديث '.trans_choice('drag.'.$pluralModelName, 1), 'تم تحديث '.trans_choice('drag.'.$pluralModelName, 1).' ينجاح')->showConfirmButton('تم','#3085d6');
         return redirect()->route('admin.'.lcfirst($pluralModelName).'.edit',$box->id);
+    }
+
+    public function boxCompleted(Request $request)
+    {
+        $input = $request->all();
+        $itemCompletedId = $input['itemCompletedId'];
+        $itemCompletedValue = $input['itemCompletedValue'];
+        
+        $boxes = Box::where('id',$itemCompletedId)->update(['completed'=>$itemCompletedValue]);
+        $items = Item::where('box_id', $itemCompletedId)->get();
+        
+        foreach ($items as $item) {
+            if($itemCompletedValue == 1){
+                $item->update(['completed'=> 1]);
+            }else{
+                $item->update(['completed'=> 0]);
+            }
+        }
+        
+        return response()->json([
+            'status'=>'success',
+            'itemCompletedValue'=> $itemCompletedValue,
+            'itemCompletedId'=> $itemCompletedId,
+            'items'=> $items,
+        ]);
     }
 
     public function filter($items)

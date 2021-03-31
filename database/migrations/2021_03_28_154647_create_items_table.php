@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->string('info')->nullable();
             $table->integer('order');
+            $table->boolean('completed')->default(false);
             $table->unsignedBigInteger('box_id');
             $table->unsignedBigInteger('admin_id');
             

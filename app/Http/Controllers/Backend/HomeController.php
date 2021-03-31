@@ -28,8 +28,8 @@ class HomeController extends Controller
     {
         $admin = auth()->guard('admin')->id();
         $boxes = Box::whereHas('items')->with(['admin','items'=>function($q) use($admin){
-            return $q->with('admin')->select('id','name','info','order','box_id','admin_id')->where('admin_id',$admin)->orderBy('order','asc');
-        }])->where('admin_id',$admin)->orderBy('order','asc')->get(['id','name','order']);
+            return $q->with('admin')->select('id','name','info','order','box_id','admin_id','completed')->where('admin_id',$admin)->orderBy('order','asc');
+        }])->where('admin_id',$admin)->orderBy('order','asc')->get(['id','name','order','completed']);
 
         return view('backend.home', compact('boxes'));
     }

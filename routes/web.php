@@ -29,7 +29,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::post('box/update/', 'HomeController@update')->name('update.box');
         Route::post('box/delete/', 'HomeController@delete')->name('delete.box');
 
+        Route::post('boxes/completed', 'BoxController@boxCompleted')->name('box.completed');
         Route::resource('boxes', 'BoxController')->except('show');
+        Route::post('items/completed', 'ItemController@itemCompleted')->name('item.completed');
         Route::resource('items', 'ItemController')->except('show');
     });
 

@@ -93,6 +93,24 @@
             border: 2px dashed #999;
             background: #ede8e8;
         }  
+        .line-through {
+            text-decoration: line-through!important;
+        }
+        .control {
+            margin-left: 0.625rem;
+        }
+        .control input {
+            margin-top: 0;
+            margin-left: 0 !important;
+        }
+        .drag-team {
+            position: relative;
+        }
+        .drag-team > .control input{
+            position: absolute;
+            top: calc(50% - 7px);
+            left: 2px;
+        }
     </style>
 @endpush
 @section('content')
@@ -105,24 +123,28 @@
             <x-card-component>
                 <div class="dropzone-teams card-body">
                     @forelse ($boxes as $box)
-                        <div class="drag-team" box-id="{{ $box->id }}">
+                        <div class="drag-team" box-id="{{ $box->id }}" id="completedbox-{{ $box->id }}">
                             <!-- {{ $box->name }} -->
                             <div class="row teamcard my-2 mx-2 pt-2 pb-1">
                                 <div class="col-md-4 my-auto text-center" style="font-weight: bold; font-size: 18px;">
                                     <div class="row">
-                                        <div class="col-md-1"><i class="team-handle fas fa-ellipsis-v" style="cursor:ns-resize;"></i></div>
-                                        <div class="col-md-9">{{ $box->name }}</div>
+                                        <div class="col-md-1"><i class="team-handle fas fa-ellipsis-v" style="cursor:ns-resize;"></i>
+                                        </div>
+                                        <div class="col-md-9 {{ $box->completed ? 'line-through' : '' }}">{{ $box->name }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-8 dropzone-users">
                                     @forelse ($box->items as $item)
                                         <!-- {{ $item->name }} -->
                                         <div class="drag-user list list-row bg-white" item-id="{{ $item->id }}">
-                                            <div class="list-item border mb-1">
+                                            <div id="completed-{{ $item->id }}" class="list-item border mb-1">
                                                 <div class="text-muted" style="cursor:ns-resize; padding-left: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
-                                                <div class="flex">
+                                                <div class="flex {{ $item->completed ? 'line-through' : '' }}">
                                                     {{ $item->name }}
                                                     <div class="item-except text-muted text-sm userinfo">{{ $item->info }}</div>
+                                                </div>
+                                                <div class="form-check control">
+                                                    <input class="form-check-input completeditem" data-id="{{ $item->id }}" type="checkbox"  {{ $item->completed ? 'checked' : '' }}>
                                                 </div>
                                             </div>
                                         </div>
@@ -130,6 +152,9 @@
                                         <div class="drag-user list list-row bg-white">لايوجد مهام حتى الان</div>
                                     @endforelse
                                 </div>
+                            </div>
+                            <div class="control">
+                                <input class="form-check-input completedbox" data-id="{{ $box->id }}" type="checkbox"  {{ $box->completed ? 'checked' : '' }}>
                             </div>
                         </div>
                     @empty
@@ -236,5 +261,71 @@
             }
         });
 
+        $( ".completeditem" ).on( "change", function( event ) {
+            var itemCompletedId = $(this).attr('data-id');
+            var itemCompletedValue;
+
+            if($(this).is(':checked')){
+                itemCompletedValue = 1;
+            }else {
+                itemCompletedValue = 0;
+            }
+
+            $.ajax({
+                url: "{{ route('admin.item.completed') }}",
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {itemCompletedId:itemCompletedId,itemCompletedValue:itemCompletedValue},
+                success: function(data) {
+                    console.log(data.status);
+                    if (data.itemCompletedValue == 1){
+                        $("#completed-"+itemCompletedId).find('.flex').addClass('line-through');
+                    }else{
+                        $("#completed-"+itemCompletedId).find('.flex').removeClass('line-through');
+                    }
+                    
+                }
+            });
+        });
+
+        $( ".completedbox" ).on( "change", function( event ) {
+            var itemCompletedId = $(this).attr('data-id');
+            var itemCompletedValue;
+
+            if($(this).is(':checked')){
+                itemCompletedValue = 1;
+            }else {
+                itemCompletedValue = 0;
+            }
+
+            $.ajax({
+                url: "{{ route('admin.box.completed') }}",
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {itemCompletedId:itemCompletedId,itemCompletedValue:itemCompletedValue},
+                success: function(data) {
+                    //console.log(data.items);
+                    if (data.itemCompletedValue == 1){
+                        $("#completedbox-"+itemCompletedId).find('.col-md-9').addClass('line-through');
+                        $.each(data.items, function(i, item) {
+                            $("#completed-"+item.id).find('.flex').addClass('line-through');
+                            $('input[data-id="'+item.id+'"].completeditem').prop('checked', true);
+                        });
+                    }else{
+                        $("#completedbox-"+itemCompletedId).find('.col-md-9').removeClass('line-through');
+                        $.each(data.items, function(i, item) {
+                            $("#completed-"+item.id).find('.flex').removeClass('line-through');
+                            $('input[data-id="'+item.id+'"].completeditem').prop('checked', false);
+                        });
+                    }
+                    
+
+                }
+            });
+        });
     </script>
 @endpush
