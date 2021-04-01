@@ -36,7 +36,7 @@ class BackendController extends Controller
         $slogan         = 'هنا يمكنك اضافة, تعديل, حدف '.trans_choice('drag.'.$pluralModelName, 1);
         $nothingHere    = 'لايوجد '.trans_choice('drag.'.$pluralModelName, 1).' بعد ';
 
-        return view('backend.'.$pluralModelName.'.index',compact('items','pluralModelName','title','slogan','nothingHere'));
+        return view('backend.'.lcfirst($pluralModelName).'.index',compact('items','pluralModelName','title','slogan','nothingHere'));
     }
 
     public function create()
@@ -46,7 +46,7 @@ class BackendController extends Controller
         $slogan         = 'هنا يمكنك اضافة '.trans_choice('drag.'.$pluralModelName, 1);
         $passDateToView = $this->passDateToView();
 
-        return view('backend.'.$pluralModelName.'.create', compact('pluralModelName','title','slogan'))->with($passDateToView);
+        return view('backend.'.lcfirst($pluralModelName).'.create', compact('pluralModelName','title','slogan'))->with($passDateToView);
     }
 
     public function edit($id)
@@ -57,7 +57,7 @@ class BackendController extends Controller
         $slogan         = 'هنا يمكنك تعديل '.trans_choice('drag.'.$pluralModelName, 1); 
         $passDateToView = $this->passDateToView();
 
-        return view('backend.'.$pluralModelName.'.edit', compact('item','pluralModelName','title','slogan'))->with($passDateToView);
+        return view('backend.'.lcfirst($pluralModelName).'.edit', compact('item','pluralModelName','title','slogan'))->with($passDateToView);
     }
 
     public function destroy($id)
