@@ -42,6 +42,7 @@ class ItemController extends BackendController
 
     public function itemCompleted(Request $request)
     {
+        $admin = auth()->guard('admin')->id();
         $input = $request->all();
         $itemCompletedId = $input['itemCompletedId'];
         $itemCompletedValue = $input['itemCompletedValue'];
@@ -50,7 +51,7 @@ class ItemController extends BackendController
         $updateitem = $item->update(['completed'=>$itemCompletedValue]);
 
         $box = Box::findOrFail($item->box_id);
-        $boxcheck = $box->items->every(function ($value, $key) {
+        $boxcheck = $box->items->where('admin_id',$admin)->every(function ($value, $key) {
             return $value->completed == 1;
         });
         if($boxcheck == true) {
