@@ -9,7 +9,7 @@
             <li class="list-group-item">
                 <a href="{{ route('admin.boxes.index') }}">الاقسام</a>
             </li>
-            @if ($boxes->count() > 0)
+            @if ($shareboxes->count() > 0)
                 <li class="list-group-item">
                     <a href="{{ route('admin.items.index') }}">العناصر</a>
                 </li>

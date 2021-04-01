@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->share('boxes' , Box::get('id'));
+        view()->share('shareboxes' , Box::get('id'));
     }
 }
