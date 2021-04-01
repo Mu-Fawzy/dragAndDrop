@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
         $roles = [
             'name' => 'required|unique:items,name',
             'info' => 'required',
-            'box_id' => 'required|max:1',
+            'box_id' => 'required',
         ];
 
         if ($this->item != null) {
