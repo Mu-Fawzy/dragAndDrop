@@ -32,4 +32,9 @@ class Box extends Model
     {
         return Carbon::parse($date)->translatedFormat('d M,Y');
     }
+
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class);
+    }
 }

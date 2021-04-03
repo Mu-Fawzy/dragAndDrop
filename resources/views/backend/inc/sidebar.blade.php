@@ -4,16 +4,14 @@
     <div class="card-body">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <a href="{{ route('admin.home') }}">الرئيسية</a>
+                <a href="{{ route('admin.home') }}">الخطط</a>
             </li>
             <li class="list-group-item">
                 <a href="{{ route('admin.boxes.index') }}">الاقسام</a>
             </li>
-            @if ($shareboxes->count() > 0)
-                <li class="list-group-item">
-                    <a href="{{ route('admin.items.index') }}">العناصر</a>
-                </li>
-            @endif
+            <li class="list-group-item">
+                <a href="{{ route('admin.items.index') }}">العناصر</a>
+            </li>
         </ul>
     </div>
 </div>

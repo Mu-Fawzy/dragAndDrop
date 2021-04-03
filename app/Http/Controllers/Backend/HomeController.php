@@ -2,36 +2,17 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Box;
 use App\Models\Item;
+use App\Models\Plan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends BackendController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct(Plan $model)
     {
-        $this->middleware('auth:admin');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        $admin = auth()->guard('admin')->id();
-        $boxes = Box::with(['admin','items'=>function($q) use($admin){
-            return $q->with('admin')->select('id','name','info','order','box_id','admin_id','completed')->where('admin_id',$admin)->orderBy('order','asc');
-        }])->where('admin_id',$admin)->orderBy('order','asc')->get(['id','name','order','completed']);
-
-        return view('backend.home', compact('boxes'));
+        parent::__construct($model);
     }
 
     public function update(Request $request) {
@@ -70,5 +51,15 @@ class HomeController extends Controller
             }
         }
         return response()->json(['status'=>'success']);
+    }
+
+    public function getModelName($model)
+    {
+        return class_basename($model);
+    }
+
+    public function getPluralName($model)
+    {
+        return Str::plural($this->getModelName($model));
     }
 }

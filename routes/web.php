@@ -33,6 +33,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::resource('boxes', 'BoxController')->except('show');
         Route::post('items/completed', 'ItemController@itemCompleted')->name('item.completed');
         Route::resource('items', 'ItemController')->except('show');
+
+        Route::resource('plans', 'PlanController');
     });
 
     Route::group(['namespace' => 'Backend\Auth'], function() {
