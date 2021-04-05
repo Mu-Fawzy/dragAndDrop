@@ -99,6 +99,11 @@ class PlanController extends BackendController
         return response()->json(['status'=>'success']);
     }
 
+    public function filter($items)
+    {
+        return $items->where('admin_id', auth()->guard('admin')->id());
+    }
+
     public function passDateToView()
     {
         return [
