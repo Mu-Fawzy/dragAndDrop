@@ -14,27 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'Backend\HomeController@index');
-Route::get('/home', 'Backend\HomeController@index');
+Route::get('/', 'Backend\PlanController@index');
+Route::get('/home', 'Backend\PlanController@index');
 
 Auth::routes();
-
-
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     
     Route::group(['namespace' => 'Backend'], function() {
-        Route::get('/', 'HomeController@index');
-        Route::get('home', 'HomeController@index')->name('home');
-        Route::post('box/update/', 'HomeController@update')->name('update.box');
-        Route::post('box/delete/', 'HomeController@delete')->name('delete.box');
+        Route::get('/', 'PlanController@index');
+        Route::get('/home', 'PlanController@index')->name('home');
+        Route::post('box/update/', 'PlanController@updateOrder')->name('update.order.box');
+        Route::post('box/delete/', 'PlanController@deleteOrder')->name('delete.order.box');
+        Route::resource('plans', 'PlanController');
 
         Route::post('boxes/completed', 'BoxController@boxCompleted')->name('box.completed');
         Route::resource('boxes', 'BoxController')->except('show');
+        
         Route::post('items/completed', 'ItemController@itemCompleted')->name('item.completed');
         Route::resource('items', 'ItemController')->except('show');
-
-        Route::resource('plans', 'PlanController');
     });
 
     Route::group(['namespace' => 'Backend\Auth'], function() {

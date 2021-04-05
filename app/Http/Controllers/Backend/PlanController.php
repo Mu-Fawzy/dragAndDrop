@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BackendController;
 use App\Http\Requests\Plans\PlanRequest;
 use App\Models\Box;
 use App\Models\Plan;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -57,6 +58,44 @@ class PlanController extends BackendController
         
         Alert::success('تحديث '.trans_choice('drag.'.$pluralModelName, 1), 'تم تحديث '.trans_choice('drag.'.$pluralModelName, 1).' ينجاح')->showConfirmButton('تم','#3085d6');;
         return redirect()->route('admin.'.lcfirst($pluralModelName).'.edit',$plan->id);
+    }
+
+    public function updateOrder(Request $request) {
+        $input = $request->all();
+
+        if(isset($input['teamArr']) && !empty($input['teamArr'])){
+            foreach ($input['teamArr'] as $key => $value) {
+                $key = $key+1;
+                Box::where('id',$value)->update(['order'=>$key]);
+            }
+        }
+
+        if(isset($input['userArr']) && !empty($input['userArr'])){
+            $usersBox = $input['usersBox'];
+            foreach ($input['userArr'] as $key => $value) {
+                $key = $key+1;
+                Item::where('id',$value)->update(['box_id'=> $usersBox ,'order'=>$key]);
+            }
+        }
+        return response()->json(['status'=>'success']);
+    }
+
+    public function deleteOrder(Request $request)
+    {
+        $input = $request->all();
+        if (isset($input['itemName'])) {
+            $itemId = $input['itemId'];
+            if( $input['itemName'] == "item-id" ){
+                $item = Item::where('id',$itemId)->first();
+                $item->delete();
+            }
+            
+            if(  $input['itemName'] == "box-id" ) {
+                $item = Box::where('id',$itemId)->first();
+                $item->delete();
+            }
+        }
+        return response()->json(['status'=>'success']);
     }
 
     public function passDateToView()

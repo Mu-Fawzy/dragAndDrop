@@ -204,7 +204,7 @@
             });
 
             $.ajax({
-                url: "{{ route('admin.update.box') }}",
+                url: "{{ route('admin.update.order.box') }}",
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -226,7 +226,7 @@
             });
 
             $.ajax({
-                url: "{{ route('admin.update.box') }}",
+                url: "{{ route('admin.update.order.box') }}",
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -248,7 +248,7 @@
                 var itemName = ui.helper[0].attributes[1].nodeName; // box-id - item-id
                 var itemId = ui.helper[0].attributes[1].textContent; // 4 - 5
                 $.ajax({
-                    url: "{{ route('admin.delete.box') }}",
+                    url: "{{ route('admin.delete.order.box') }}",
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
