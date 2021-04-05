@@ -25,9 +25,9 @@ class BackendController extends Controller
         }
         $items = $items->orderBy('id','desc');
         if ($this->selectToShow() != null) {
-            $items = $items->paginate(15,$this->selectToShow());
+            $items = $items->paginate(10,$this->selectToShow());
         }else {
-            $items = $items->paginate(15);
+            $items = $items->paginate(10);
         }
 
         $pluralModelName = $this->getPluralName($this->model);

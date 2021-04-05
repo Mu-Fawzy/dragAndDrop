@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="col-md-9">
-        <x-table-card-components :title="$title" :slogan="$slogan" :pluralModelName="$pluralModelName">
+        <x-table-card-components :title="$title" :slogan="$slogan" :pluralModelName="$pluralModelName" :items="$items">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -39,6 +39,7 @@
                 </tbody>
             </table>
         </x-table-card-components>
+        
     </div>
 @endsection
 

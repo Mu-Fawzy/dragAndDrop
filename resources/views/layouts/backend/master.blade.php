@@ -19,6 +19,13 @@
         .card-header:first-child {
             display:flex;
         }
+        table {
+            margin-bottom: 0 !important;
+        }
+        nav ul.pagination {
+            margin-top: 1rem !important;
+            margin: 0
+        }
     </style>
 </head>
 <body>

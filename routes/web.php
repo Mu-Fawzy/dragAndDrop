@@ -20,7 +20,6 @@ Route::get('/home', 'Backend\PlanController@index');
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
-    
     Route::group(['namespace' => 'Backend'], function() {
         Route::get('/', 'PlanController@index');
         Route::get('/home', 'PlanController@index')->name('home');
@@ -49,8 +48,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         
         Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');
         Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
-
     });
-
-
 });
