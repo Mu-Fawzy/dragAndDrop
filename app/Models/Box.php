@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use App\Traits\FormatDates;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Box extends Model
 {
-    use HasFactory;
+    use HasFactory, FormatDates;
 
     protected $fillable = [
         'name',
@@ -26,11 +26,6 @@ class Box extends Model
     public function admin()
     {
         return $this->belongsTo(Admin::class, 'admin_id', 'id');
-    }
-
-    public function getCreatedAtAttribute($date)
-    {
-        return Carbon::parse($date)->translatedFormat('d M,Y');
     }
 
     public function plans()
