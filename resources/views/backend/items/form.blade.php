@@ -1,5 +1,5 @@
 <div class="form-group">
-    <label for="exampleFormControlInput1">اسم المهمة</label>
+    <label for="exampleFormControlInput1">اسم العنصر</label>
     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $item->name ?? old('name') }}" placeholder="{{ 'اسم '.trans_choice('drag.'.$pluralModelName, 1) }}">
     @error('name')
         <span class="invalid-feedback" role="alert">
@@ -9,7 +9,7 @@
 </div>
 
 <div class="form-group">
-    <label for="exampleFormControlInput1">معلومات المهمة</label>
+    <label for="exampleFormControlInput1">معلومات العنصر</label>
     <input type="text" class="form-control @error('info') is-invalid @enderror" name="info" value="{{ $item->info ?? old('info') }}" placeholder="{{ 'معلومات '.trans_choice('drag.'.$pluralModelName, 1) }}"> 
     @error('info')
         <span class="invalid-feedback" role="alert">

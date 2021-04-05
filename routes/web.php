@@ -25,7 +25,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
         Route::get('/home', 'PlanController@index')->name('home');
         Route::post('box/update/', 'PlanController@updateOrder')->name('update.order.box');
         Route::post('box/delete/', 'PlanController@deleteOrder')->name('delete.order.box');
-        Route::resource('plans', 'PlanController');
+        Route::get('admin/plans/{plan}/{slug}', 'PlanController@show')->name('plans.show');
+        Route::resource('plans', 'PlanController')->except('show');
 
         Route::post('boxes/completed', 'BoxController@boxCompleted')->name('box.completed');
         Route::resource('boxes', 'BoxController')->except('show');

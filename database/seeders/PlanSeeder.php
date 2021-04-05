@@ -19,7 +19,7 @@ class PlanSeeder extends Seeder
         $boxIds = DB::table('boxes')->pluck('id')->toArray();
         $plans->each(function($plan) use($boxIds)
         {
-            $plan->boxes()->sync(shuffle($boxIds));
+            $plan->boxes()->sync(array_rand( $boxIds, 2 ));
         });
     }
 }

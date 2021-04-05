@@ -17,7 +17,7 @@ class PlanController extends BackendController
         parent::__construct($model);
     }
 
-    public function show($id)
+    public function show($id,$slug)
     {
         $admin = auth()->guard('admin')->id();
         $boxes = Box::whereHas('plans', function($q) use($id){
@@ -33,6 +33,7 @@ class PlanController extends BackendController
     {
         $pluralModelName = $this->getPluralName($this->model);
         $input = $request->merge([
+            'slug' => $this->my_slug($request->name),
             'admin_id' => auth()->guard('admin')->id(),
         ]);
 
@@ -103,6 +104,20 @@ class PlanController extends BackendController
         return [
             'boxes' => Box::where('admin_id',auth()->guard('admin')->id())->get()
         ];
+    }
+
+    private function my_slug($string, $separator = '-')
+    {
+        $string = trim($string);
+        $string = mb_strtolower($string, 'UTF-8');
+
+        // Remove multiple dashes or whitespaces or underscores
+        $string = preg_replace("/[\s-]+/", " ", $string);
+        $string = preg_replace("/[\s_]+/", " ", $string);
+        // Convert whitespaces and underscore to the given separator
+        $string = preg_replace("/[\s_]/", $separator, $string);
+
+        return rawurldecode($string);
     }
 
 }

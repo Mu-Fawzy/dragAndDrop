@@ -77,7 +77,7 @@ class ItemController extends BackendController
 
     public function selectToShow()
     {
-        return ['id','name','info','box_id','created_at'];
+        return ['id','name','info','box_id','completed','created_at'];
     }
 
     public function with()
