@@ -33,7 +33,7 @@ class BackendController extends Controller
         $pluralModelName = $this->getPluralName($this->model);
 
         $title          = 'قائمة '.trans_choice('drag.'.$pluralModelName, 2); 
-        $slogan         = 'هنا يمكنك اضافة, تعديل, حدف '.trans_choice('drag.'.$pluralModelName, 1);
+        $slogan         = 'هنا يمكنك اضافة, تعديل, حذف '.trans_choice('drag.'.$pluralModelName, 1);
         $nothingHere    = 'لايوجد '.trans_choice('drag.'.$pluralModelName, 1).' بعد ';
 
         return view('backend.'.lcfirst($pluralModelName).'.index',compact('items','pluralModelName','title','slogan','nothingHere'));
