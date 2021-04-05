@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Boxes;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -24,11 +25,20 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         $roles = [
-            'name' => 'required|unique:boxes,name',
+            'name' => [
+                'required',
+                Rule::unique('boxes','name')
+                ->where('admin_id',auth()->guard('admin')->id())
+            ],
         ];
 
         if ($this->box != null) {
-            $roles['name'] = 'required|unique:boxes,name,'.$this->box->id;
+            $roles['name'] = [
+                'required',
+                Rule::unique('boxes','name')
+                ->ignore($this->box)
+                ->where('admin_id',auth()->guard('admin')->id())
+            ];
         }
 
         return $roles;

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Plans;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PlanRequest extends FormRequest
 {
@@ -24,14 +25,23 @@ class PlanRequest extends FormRequest
     public function rules()
     {
         $roles = [
-            'name'          => 'required|unique:boxes,name',
+            'name'          => [
+                'required',
+                Rule::unique('plans','name')
+                ->where('admin_id',auth()->guard('admin')->id())
+            ],
             'description'   => 'min:10',
             'box_ids'       => 'required|array',
             'box_ids.*'     => 'required|string|distinct|min:1',
         ];
 
-        if ($this->box != null) {
-            $roles['name'] = 'required|unique:plans,name,'.$this->plan->id;
+        if ($this->plan != null) {
+            $roles['name'] = [
+                'required',
+                Rule::unique('plans','name')
+                ->ignore($this->plan)
+                ->where('admin_id',auth()->guard('admin')->id())
+            ];
         }
 
         return $roles;
