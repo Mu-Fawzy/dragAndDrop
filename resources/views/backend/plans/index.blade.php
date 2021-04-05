@@ -7,9 +7,9 @@
 @endpush
 
 @section('content')
-    <div class="col-md-9">
+    <div class="col-md-8 col-lg-9">
         <x-table-card-components :title="$title" :slogan="$slogan" :pluralModelName="$pluralModelName" :items="$items">
-            <table class="table table-striped">
+            <table class="table table-responsive table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

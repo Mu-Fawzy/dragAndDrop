@@ -6,7 +6,7 @@
 
 @endpush
 @section('content')
-    <div class="col-md-9">
+    <div class="col-md-8 col-lg-9">
         <div class="card">
             <div class="card-header justify-content-between">
                 <div class="my-auto">

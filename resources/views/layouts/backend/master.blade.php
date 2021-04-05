@@ -26,6 +26,10 @@
             margin-top: 1rem !important;
             margin: 0
         }
+        .table-responsive thead,.table-responsive tbody {
+            display: inline-table;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -87,7 +91,7 @@
         <main class="py-4">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-4 col-lg-3 mb-3">
                         @include('backend.inc.sidebar')
                     </div>
                     @yield('content')
