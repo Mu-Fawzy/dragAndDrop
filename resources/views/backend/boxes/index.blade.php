@@ -9,41 +9,14 @@
 @section('content')
     <div class="col-md-8 col-lg-9">
         <x-table-card-components :title="$title" :slogan="$slogan" :pluralModelName="$pluralModelName" :items="$items">
-            <table class="table table-responsive table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">اسم القسم</th>
-                        <th scope="col">تاريخ الانشاء</th>
-                        <th scope="col">العمليات</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($items as $item)
-                        <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->created_at }}</td>
-                            <td>
-                                <div class="d-flex justify-content-right">
-                                    @include('backend.inc.buttons.edit')
-                                    @include('backend.inc.buttons.delete')
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="text-center">{{ $nothingHere }}</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            @include('backend.boxes.table')
         </x-table-card-components>
         
     </div>
 @endsection
 
 @push('add_js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function deleteConfirm(formId){
             Swal.fire({
@@ -79,6 +52,42 @@
                     })
                 }
             })
+        }
+
+        // load paginate ajax
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                }else{
+                    getData(page);
+                }
+            }
+        });
+        $(document).ready(function() {
+            $(document).on('click', '.pagination a',function(event){
+                event.preventDefault();
+                $('li').removeClass('active');
+                $(this).parent('li').addClass('active');
+
+                var page = $(this).attr('href').split('page=')[1];
+
+                getData(page)
+            })
+        });
+
+        function getData(page) {
+            $.ajax({
+                url: '?page=' + page,
+                type: "get",
+                datatype: "html"
+            }).done(function(data){
+                $("#tableboxes").empty().html(data);
+                location.hash = page;
+            }).fail(function(jqXHR, ajaxOptions, thrownError){
+                alert('No response from server');
+            });
         }
     </script>
 @endpush

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Box;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class BackendController extends Controller
@@ -16,7 +17,7 @@ class BackendController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $items = $this->model;
         $items = $this->filter($items);
@@ -25,9 +26,9 @@ class BackendController extends Controller
         }
         $items = $items->orderBy('id','desc');
         if ($this->selectToShow() != null) {
-            $items = $items->paginate(10,$this->selectToShow());
+            $items = $items->paginate(5,$this->selectToShow());
         }else {
-            $items = $items->paginate(10);
+            $items = $items->paginate(5);
         }
 
         $pluralModelName = $this->getPluralName($this->model);
@@ -36,6 +37,9 @@ class BackendController extends Controller
         $slogan         = 'هنا يمكنك اضافة, تعديل, حذف '.trans_choice('drag.'.$pluralModelName, 1);
         $nothingHere    = 'لايوجد '.trans_choice('drag.'.$pluralModelName, 1).' بعد ';
 
+        if ($request->ajax()) {
+            return view('backend.'.lcfirst($pluralModelName).'.table',compact('items','pluralModelName','title','slogan','nothingHere'));
+        }
         return view('backend.'.lcfirst($pluralModelName).'.index',compact('items','pluralModelName','title','slogan','nothingHere'));
     }
 

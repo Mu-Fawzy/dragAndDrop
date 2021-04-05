@@ -11,7 +11,8 @@
         <div class="btns mb-3">
             <a href="{{ route('admin.'.lcfirst($pluralModelName).'.create') }}" class="btn btn-primary btn-sm">اضف {{ trans_choice('drag.'.$pluralModelName, 1) }}</a>
         </div>
-        {{ $slot }}
-        {!! $items->links('pagination::bootstrap-4') !!}
+        <div id="table{{ lcfirst($pluralModelName) }}">
+            {{ $slot }}
+        </div>
     </div>
 </div>
