@@ -1,4 +1,4 @@
-@extends('layouts.backend.app')
+@extends('layouts.backend.master')
 @push('add_css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <style>
@@ -114,58 +114,51 @@
     </style>
 @endpush
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-lg-3 mb-3">
-            @include('backend.inc.sidebar')
-        </div>
-        <div class="col-md-8 col-lg-9">
-            <x-card-component>
-                <div class="dropzone-teams card-body">
-                    @forelse ($boxes as $box)
-                        <div class="drag-team" box-id="{{ $box->id }}" id="completedbox-{{ $box->id }}">
-                            <!-- {{ $box->name }} -->
-                            <div class="row teamcard my-2 mx-2 pt-2 pb-1">
-                                <div class="col-md-4 my-auto text-center" style="font-weight: bold; font-size: 18px;">
-                                    <div class="row">
-                                        <div class="col-md-1"><i class="team-handle fas fa-ellipsis-v" style="cursor:ns-resize;"></i>
-                                        </div>
-                                        <div class="col-md-9 {{ $box->completed ? 'line-through' : '' }}">{{ $box->name }}</div>
+    <div class="col-md-8 col-lg-9">
+        <x-card-component>
+            <div class="dropzone-teams card-body">
+                @forelse ($boxes as $box)
+                    <div class="drag-team" box-id="{{ $box->id }}" id="completedbox-{{ $box->id }}">
+                        <!-- {{ $box->name }} -->
+                        <div class="row teamcard my-2 mx-2 pt-2 pb-1">
+                            <div class="col-md-4 my-auto text-center" style="font-weight: bold; font-size: 18px;">
+                                <div class="row">
+                                    <div class="col-md-1"><i class="team-handle fas fa-ellipsis-v" style="cursor:ns-resize;"></i>
                                     </div>
+                                    <div class="col-md-9 {{ $box->completed ? 'line-through' : '' }}">{{ $box->name }}</div>
                                 </div>
-                                <div class="col-md-8 dropzone-users">
-                                    @forelse ($box->items as $item)
-                                        <!-- {{ $item->name }} -->
-                                        <div class="drag-user list list-row bg-white" item-id="{{ $item->id }}">
-                                            <div id="completed-{{ $item->id }}" class="list-item border mb-1">
-                                                <div class="text-muted" style="cursor:ns-resize; padding-left: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
-                                                <div class="flex {{ $item->completed ? 'line-through' : '' }}">
-                                                    {{ $item->name }}
-                                                    <div class="item-except text-muted text-sm userinfo">{{ $item->info }}</div>
-                                                </div>
-                                                <div class="form-check control">
-                                                    <input class="form-check-input completeditem" data-id="{{ $item->id }}" type="checkbox"  {{ $item->completed ? 'checked' : '' }}>
-                                                </div>
+                            </div>
+                            <div class="col-md-8 dropzone-users">
+                                @forelse ($box->items as $item)
+                                    <!-- {{ $item->name }} -->
+                                    <div class="drag-user list list-row bg-white" item-id="{{ $item->id }}">
+                                        <div id="completed-{{ $item->id }}" class="list-item border mb-1">
+                                            <div class="text-muted" style="cursor:ns-resize; padding-left: 0!important"><i class="user-handle fas fa-ellipsis-v"></i></div>
+                                            <div class="flex {{ $item->completed ? 'line-through' : '' }}">
+                                                {{ $item->name }}
+                                                <div class="item-except text-muted text-sm userinfo">{{ $item->info }}</div>
+                                            </div>
+                                            <div class="form-check control">
+                                                <input class="form-check-input completeditem" data-id="{{ $item->id }}" type="checkbox"  {{ $item->completed ? 'checked' : '' }}>
                                             </div>
                                         </div>
-                                    @empty
-                                        <div class="drag-user list list-row bg-white">لايوجد عناصر حتى الان - <a href="{{ route('admin.items.create') }}">اضف عنصر الان</a></div>
-                                    @endforelse
-                                </div>
-                            </div>
-                            <div class="control">
-                                <input class="form-check-input completedbox" data-id="{{ $box->id }}" type="checkbox"  {{ $box->completed ? 'checked' : '' }}>
+                                    </div>
+                                @empty
+                                    <div class="drag-user list list-row bg-white">لايوجد عناصر حتى الان - <a href="{{ route('admin.items.create') }}">اضف عنصر الان</a></div>
+                                @endforelse
                             </div>
                         </div>
-                    @empty
-                        <div class="drag-team">لايوجد اقسام حتى الان - <a href="{{ route('admin.boxes.create') }}">اضف قسم الان</a></div>
-                    @endforelse
-                    
-                </div> <!-- DROPZONE END -->
-            </x-card-component>
-        </div>
+                        <div class="control">
+                            <input class="form-check-input completedbox" data-id="{{ $box->id }}" type="checkbox"  {{ $box->completed ? 'checked' : '' }}>
+                        </div>
+                    </div>
+                @empty
+                    <div class="drag-team">لايوجد اقسام حتى الان - <a href="{{ route('admin.boxes.create') }}">اضف قسم الان</a></div>
+                @endforelse
+                
+            </div> <!-- DROPZONE END -->
+        </x-card-component>
     </div>
-</div>
 @endsection
 
 @push('add_js')

@@ -3,7 +3,23 @@
 @section('title', $title)
 
 @push('add_css')
-    
+    <style>
+        #table{{ lcfirst($pluralModelName) }} {
+            position: relative;
+        }
+        #loader {
+            position: absolute;
+            right: 0;
+            left: 0;
+            text-align: center;
+            top: calc(50% - 75px);
+            display: none;
+        }
+        #loader img {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -70,6 +86,9 @@
                 $('li').removeClass('active');
                 $(this).parent('li').addClass('active');
 
+                $("#table{{ lcfirst($pluralModelName) }}").css('opacity', '0.6');
+                $("#loader").show();
+
                 var page = $(this).attr('href').split('page=')[1];
 
                 getData(page)
@@ -82,7 +101,9 @@
                 type: "get",
                 datatype: "html"
             }).done(function(data){
-                $("#tableplans").empty().html(data);
+                $("#loader").hide();
+                $("#table{{ lcfirst($pluralModelName) }}").css('opacity', '1');
+                $("#table{{ lcfirst($pluralModelName) }}").empty().html(data);
                 location.hash = page;
             }).fail(function(jqXHR, ajaxOptions, thrownError){
                 alert('No response from server');

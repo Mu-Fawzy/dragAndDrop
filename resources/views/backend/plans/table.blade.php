@@ -1,3 +1,6 @@
+<div id='loader'>
+    <img src='{{ asset("assets/img/loading.gif") }}'>
+</div>
 <table class="table table-responsive table-striped">
     <thead>
         <tr>

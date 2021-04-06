@@ -31,6 +31,7 @@
             width: 100%;
         }
     </style>
+    @stack('add_css')
 </head>
 <body>
     <div id="app">
