@@ -32,13 +32,11 @@ class PlanController extends BackendController
     public function store(PlanRequest $request)
     {
         $pluralModelName = $this->getPluralName($this->model);
-        $input = $request->merge([
-            'slug' => $this->my_slug($request->name),
-            'admin_id' => auth()->guard('admin')->id(),
-        ]);
 
         $this->model->name          = $request->name;
         $this->model->description   = $request->description;
+        $this->model->slug   = $this->my_slug($request->name);
+        $this->model->admin_id   = auth()->guard('admin')->id();
 
         $this->model->save();
 
